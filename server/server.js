@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 
-const dbURL = "mongodb+srv://test:test50645@nodeproject-65efd.mongodb.net/test?retryWrites=true&w=majority";
+const dbURL = "mongodb+srv://ar50645:test50645@nodeproject-65efd.mongodb.net/test?retryWrites=true&w=majority";
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
