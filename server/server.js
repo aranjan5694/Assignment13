@@ -4,42 +4,42 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 
-const dbURL = "mongodb+srv://test:test123@nodeproject-6ejkm.mongodb.net/test?retryWrites=true&w=majority";
+const dbURL = "mongodb+srv://test:test50645@nodeproject-65efd.mongodb.net/test?retryWrites=true&w=majority";
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const Product = mongoose.model('product', {
     "id": Number,
     "product": {
-       "productid": Number,
-       "category": String,
-       "price": Number,
-       "name": String,
-       "instock": Boolean
+        "productid": Number,
+        "category": String,
+        "price": Number,
+        "name": String,
+        "instock": Boolean
     }
 })
 
 let object = {
     "id": 0,
     "product": {
-       "productid": 0,
-       "category": "",
-       "price": 0,
-       "name": "",
-       "instock": true
-    
+        "productid": 0,
+        "category": "",
+        "price": 0,
+        "name": "",
+        "instock": true
+
     }
-}   
+}
 
 let objects = {
-    '1': {id: 1, category: 'Music', price: '$50', name: 'Clarinet'},
-    '2': {id: 2, category: 'Music', price: '$5,000', name: 'Cello'},
-    '3': {id: 3, category: 'Music', price: '$3,500', name: 'Tuba'},
-    '4': {id: 4, category: 'Furniture', price: '$709', name: 'Lounge Seat'},
-    '5': {id: 5, category: 'Furniture', price: '$1,320', name: 'Table'},
-    '6': {id: 6, category: 'Furniture', price: '$110', name: 'Bag'}
+    '1': { id: 1, category: 'Music', price: '$50', name: 'Clarinet' },
+    '2': { id: 2, category: 'Music', price: '$5,000', name: 'Cello' },
+    '3': { id: 3, category: 'Music', price: '$3,500', name: 'Tuba' },
+    '4': { id: 4, category: 'Furniture', price: '$709', name: 'Lounge Seat' },
+    '5': { id: 5, category: 'Furniture', price: '$1,320', name: 'Table' },
+    '6': { id: 6, category: 'Furniture', price: '$110', name: 'Bag' }
 };
 
 app.get('/product/get/', function (req, res) {
@@ -51,7 +51,7 @@ app.get('/product/get/', function (req, res) {
 
 app.post('/product/create', function (req, res) {
     const newProduct = req.body.product;
-    if(newProduct){
+    if (newProduct) {
         const product = new Product({
             id: newProduct.id,
             product: {
@@ -63,7 +63,7 @@ app.post('/product/create', function (req, res) {
             }
         });
         product.save((err) => {
-            if(err){
+            if (err) {
                 res.sendStatus(500);
             }
         });
@@ -76,7 +76,7 @@ app.post('/product/create', function (req, res) {
 
 app.put('/product/update/:id', function (req, res) {
     const id = req.params.id;
-    Product.updateOne({ id }, req.body.product, function(err, res) {
+    Product.updateOne({ id }, req.body.product, function (err, res) {
 
     });
     res.sendStatus(200);
@@ -85,7 +85,7 @@ app.put('/product/update/:id', function (req, res) {
 app.delete('/product/delete/:id', function (req, res) {
     const id = req.params.id;
 
-    if(id){
+    if (id) {
         Product.deleteOne({ id }, function (err) {
             if (err) {
                 res.sendStatus(500);
